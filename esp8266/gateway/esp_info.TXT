@@ -1,1 +1,2 @@
 MAC: E8:DB:84:94:9A:1B
+Message format: id//temp//hum
