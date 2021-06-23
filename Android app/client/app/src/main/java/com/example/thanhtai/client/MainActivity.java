@@ -694,7 +694,7 @@ public class MainActivity extends Activity {
             axisValues.add(new AxisValue(i).setLabel(formatMinutes(i)));
         }
 
-        Axis tempoAxis = new Axis(axisValues).setName("Temperature [C]").setHasLines(true).setMaxLabelChars(4)
+        Axis tempoAxis = new Axis().setName("Temperature [C]").setHasLines(true).setMaxLabelChars(3)
                 .setTextColor(ChartUtils.COLOR_RED);
         data1.setAxisYLeft(tempoAxis);
 
@@ -711,7 +711,9 @@ public class MainActivity extends Activity {
         // viewport. Set
         // viewport with Y range 0-12;
         Viewport v = lineChartView.getMaximumViewport();
-        v.set(v.left, maxv+2, v.right, minv-2);
+        if(minv-2<=0) minv=0;
+        else minv-=2;
+        v.set(v.left, maxv+2, v.right, minv);
         lineChartView.setMaximumViewport(v);
         lineChartView.setCurrentViewport(v);
 
@@ -725,7 +727,7 @@ public class MainActivity extends Activity {
         int minutes = (int) Math.floor(valueInSeconds / 60);
 
 
-        sb.append(String.valueOf(minutes));
+        sb.append(String.valueOf(value));
         return sb.toString();
     }
 
