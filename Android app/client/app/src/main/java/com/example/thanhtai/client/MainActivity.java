@@ -78,6 +78,8 @@ public class MainActivity extends Activity {
     int device_select=1;
     chartData data=new chartData();
     private LineChartData data1;
+    String chart_title1="";
+    boolean chart_tt_b=false;
 
     String feedAPI="https://io.adafruit.com/api/v2/anhlaga06/feeds/thanhtai/data";
 
@@ -127,6 +129,7 @@ public class MainActivity extends Activity {
                 getDataFeed(choose_type);
                 e_h.setEnabled(true);
                 e_d.setEnabled(true);
+                chart_tt_b=false;
 
             }
         });
@@ -141,6 +144,7 @@ public class MainActivity extends Activity {
                 getDataFeed(choose_type);
                 e_h.setEnabled(false);
                 e_d.setEnabled(true);
+                chart_tt_b=false;
 
             }
         });
@@ -155,6 +159,7 @@ public class MainActivity extends Activity {
                 getDataFeed(choose_type);
                 e_h.setEnabled(false);
                 e_d.setEnabled(false);
+                chart_tt_b=false;
             }
         });
 
@@ -163,6 +168,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 try{
                     int hour,day,month;
+                    chart_tt_b=true;
                     switch (choose_type){
                         case month:
                             month=Integer.parseInt(e_m.getText().toString());
@@ -172,6 +178,7 @@ public class MainActivity extends Activity {
                                 break;
                             }
                             //end valider
+                            chart_title1=String.valueOf(month)+"/2021";
                             boolean cont11=getDataFeed_1(0,0,month,choose_type);
                             if (!cont11) {
                                 Toast.makeText(getApplicationContext(),"Invalid month and date number",Toast.LENGTH_LONG).show();
@@ -179,6 +186,7 @@ public class MainActivity extends Activity {
                             }
                             break;
                         case day:
+
                             month=Integer.parseInt(e_m.getText().toString());
                             day=Integer.parseInt(e_d.getText().toString());
                             //valider
@@ -191,6 +199,7 @@ public class MainActivity extends Activity {
                                 break;
                             }
                             //end valideer
+                            chart_title1=String.valueOf(day)+"/"+String.valueOf(month)+"/2021";
                             boolean cont111=getDataFeed_1(0,day,month,choose_type);
                             if (!cont111) {
                                 Toast.makeText(getApplicationContext(),"Invalid month and date number",Toast.LENGTH_LONG).show();
@@ -215,6 +224,7 @@ public class MainActivity extends Activity {
                                 break;
                             }
                             //endvalider
+                            chart_title1=String.valueOf(hour)+"h "+String.valueOf(day)+"/"+String.valueOf(month)+"/2021";
                             boolean cont1=getDataFeed_1(hour,day,month,choose_type);
                             if (!cont1) {
                                 Toast.makeText(getApplicationContext(),"Invalid month and date number",Toast.LENGTH_LONG).show();
@@ -226,6 +236,7 @@ public class MainActivity extends Activity {
                     }
                 } catch (NumberFormatException e){
                     Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();
+                    chart_tt_b=false;
                 }
             }
         });
@@ -311,7 +322,7 @@ public class MainActivity extends Activity {
                     c.set(Calendar.DATE,day);
                     //start time
                     c.add(Calendar.HOUR,-7);
-                    format1 = new SimpleDateFormat("yyyy-MM-dd 00:00:00");
+                    format1 = new SimpleDateFormat("yyyy-MM-dd HH:00:00");
                     start_time = format1.format(c.getTime());
                     start_time=start_time.replace(" ","T");
                     start_time=start_time+"Z";
@@ -327,7 +338,7 @@ public class MainActivity extends Activity {
                 case month:
                     c.set(Calendar.MONTH,month-1);
                     //start time
-                    c.add(Calendar.HOUR,-7);
+                    //c.add(Calendar.HOUR,-7);
                     format1 = new SimpleDateFormat("yyyy-MM-00 00:00:00");
                     start_time = format1.format(c.getTime());
                     start_time=start_time.replace(" ","T");
@@ -546,6 +557,11 @@ public class MainActivity extends Activity {
         double[] temp1=tem;
         double[] hum1=hum;
         String[] minus1=minus;
+        if(type==typed.day){
+            for(int i=0;i<minus1.length;i++){
+                minus1[i]=String.valueOf((Integer.parseInt(minus1[i])+7)%23);
+            }
+        }
         String labelBot="";
         //sorting to set viewport
         double[] stemp=tem;
@@ -559,15 +575,42 @@ public class MainActivity extends Activity {
         if(stemp[stemp.length-1]*2<shum[shum.length-1]){
             maxv=(int)(shum[shum.length-1]/2);
         }
+        Date date = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setLenient(false);
+        c.setTime(date);
+        SimpleDateFormat format1;
         switch (type){
             case month:
-                labelBot="Time: [Day]";
+                //labelBot="Time: [Day]";
+                if(chart_tt_b){
+                    labelBot=chart_title1+" [Day]";
+                }else {
+                    //format1 = new SimpleDateFormat("yyyy-MM-dd HH:00:00");
+                    format1 = new SimpleDateFormat("MM-yyyy");
+                    String start_time = format1.format(c.getTime());
+                    labelBot=start_time+" [Day]";
+                }
                 break;
             case day:
-                labelBot="Time: [Hour]";
+                if(chart_tt_b){
+                    labelBot=chart_title1+" [Hour]";
+                }else {
+                    //format1 = new SimpleDateFormat("yyyy-MM-dd HH:00:00");
+                    format1 = new SimpleDateFormat("dd-MM-yyyy");
+                    String start_time = format1.format(c.getTime());
+                    labelBot=start_time+" [Hour]";
+                }
                 break;
             case hour:
-                labelBot="Time: [Minute]";
+                if(chart_tt_b){
+                    labelBot=chart_title1+" [Minute]";
+                }else {
+                    //format1 = new SimpleDateFormat("yyyy-MM-dd HH:00:00");
+                    format1 = new SimpleDateFormat("HH dd-MM-yyyy");
+                    String start_time = format1.format(c.getTime()).replace(" ","h ");
+                    labelBot=start_time+" [Minute]";
+                }
                 break;
             default:
                 break;

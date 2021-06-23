@@ -51,7 +51,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="hours"
+                android:text="hour"
                 android:id="@+id/button_h"
                 android:background="#005b96"/>
             <Button
