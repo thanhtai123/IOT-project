@@ -17,15 +17,15 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Data: "
+            android:text="Recieve: "
             android:gravity="center_vertical"
-            android:textSize="30dp"/>
+            android:textSize="20dp"/>
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
-            android:textSize="15dp"
-            android:text="is generated randomly in range 10 to 50 and is sent to mqtt server per 1s"
+            android:textSize="20dp"
+            android:hint="data"
             android:gravity="center_vertical"
             android:padding="10dp"
             android:id="@+id/textViewTopic"/>
@@ -39,9 +39,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Data: "
+            android:text="Send: "
             android:gravity="center_vertical"
-            android:textSize="35dp"/>
+            android:textSize="20dp"/>
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -52,11 +52,6 @@
             android:padding="10dp"
             android:id="@+id/textViewData"/>
     </LinearLayout>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:text="click"
-        android:id="@+id/button_click"/>
+
 
 </LinearLayout>

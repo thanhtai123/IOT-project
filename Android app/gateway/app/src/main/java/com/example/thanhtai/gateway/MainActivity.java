@@ -32,30 +32,13 @@ import java.util.concurrent.Executors;
 
 public class MainActivity extends Activity implements SerialInputOutputManager.Listener {
     TextView textView_topic,textView_data;
-    Random random= new Random();
-    Button bt_c;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         textView_topic=findViewById(R.id.textViewTopic);
         textView_data=findViewById(R.id.textViewData);
-        bt_c=findViewById(R.id.button_click);
-        bt_c.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                JSONObject ob = new JSONObject();
-                try {
-                    ob.put("id","1");
-                    ob.put("temp","31.1");
-                    ob.put("hum","71.5");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                sendDataToMQTT(ob.toString());
-            }
-        });
         startMQTT();
         openUART();
         //sendDataToMQTT("aa","bb");
@@ -163,6 +146,7 @@ public class MainActivity extends Activity implements SerialInputOutputManager.L
     public void onNewData(byte[] data) {
         try {
             buffer = new String(data);
+            textView_topic.setText(buffer);
             String[] data_js=buffer.split("//");
             int id=Integer.parseInt(data_js[0]);
             double temp=round(Double.parseDouble(data_js[1]),1);
@@ -172,9 +156,12 @@ public class MainActivity extends Activity implements SerialInputOutputManager.L
             ob.put("id",String.valueOf(id));
             ob.put("temp",String.valueOf(temp));
             ob.put("hum",String.valueOf(hum));
+            textView_data.setText(ob.toString());
             sendDataToMQTT(ob.toString());
         } catch (Exception e) {
             e.printStackTrace();
+            String a="failed";
+            textView_data.setText(a);
         }
 
 
