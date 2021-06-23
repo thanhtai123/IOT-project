@@ -1,0 +1,11 @@
+* { margin: 0px; font-family: Montserrat, sans-serif; }
+
+.thong.tin {
+    font-size: 30px;
+}
+
+.container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
