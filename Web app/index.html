@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<title> Interner of things </title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">  
+	<script type="text/javascript" src="vendor/bootstrap.js"></script>
+	<!-- <script type="text/javascript" src="./js/app.js"></script> -->
+    <script type="text/javascript" src="./js/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"></script>
+	<link rel="stylesheet" href="vendor/bootstrap.css">
+ 	<link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="/css/circle.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">   
+</head>
+
+<body>
+    
+    
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="container">
+            <div class="row">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">
+                        <i class="fas fa-wifi"></i>
+                        IOT Project
+                    </a>
+                </div>
+            
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/index.html" data-toggle="tooltip" data-placement="bottom" title="Sensor data" ><i class="fas fa-database"></i></a></li>
+                        <li><a href="/statistics.html" data-toggle="tooltip" data-placement="bottom" title="Statistics" ><i class="fas fa-analytics"></i></a></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div>
+        </div>
+    </nav><!-- End navbar -->
+    
+    <div class="title">
+        <div class="container">
+            <div class="row text-center">
+                <h1>DATA SENSOR</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="thumbnail">
+                        <div class="caption text-center">
+                            <h3>Temperature <i class="fas fa-temperature-low"></i></h3>
+                        </div>
+                        <div class="noidung">
+                            <div class="nhietdo text-center">
+                                <!-- <i class="fas fa-temperature-low"></i>
+                                <h1 id = "temp">37<span>&#8451;</span></h1> -->
+                                <div class="around">
+                                    <div id = "T" class="c100 orange big p0">
+                                        <span class="con1">
+                                            <span>
+                                                <span id = "temp">0</span> <span>&#8451;</span>
+                                            </span>
+                                        </span>
+                                        <div class="slice">
+                                            <div class="bar tem"></div>
+                                            <div class="fill"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="thumbnail">
+                        <div class="caption text-center">
+                            <h3>Humidity<i class="fas fa-dewpoint"></i></h3>
+                        </div>
+                        <div class="noidung">
+                            <div class="nhietdo text-center">
+                                <div class="around">
+                                    <div id = "H" class="c100 big p0">
+                                        <span class="con2">
+                                            <span>
+                                                <span id = "humi">0</span><span>%</span>
+                                                
+                                            </span>
+                                        </span>
+                                        <div class="slice">
+                                            <div class="bar hum"></div>
+                                            <div class="fill"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- end content 1 -->
+
+    <div class="button">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                    <div class="btn btn-default nut1 active">
+                        <h1>Node Sensor 1</h1>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                    <div class="btn btn-default nut2 ">
+                        <h1>Node Sensor 2</h1>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                    <div class="btn btn-default nut3">
+                        <h1>Node Sensor 3</h1>
+                    </div>
+                </div>           
+            </div>
+        </div>
+    </div><!-- end button -->
+
+    <div class="footer navbar-fixed-bottom">
+        <div class="container">
+            <div class="row text-center">
+                Copyright © 2021 Loc Doan & Tai Nguyen
+            </div>
+        </div>
+    </div>
+</body>
+</html>
