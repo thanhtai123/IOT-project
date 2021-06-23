@@ -1,7 +1,7 @@
-package com.example.thanhtai.client;
+package com.example.thanhtai.gateway;
 
 /**
- * Created by Thanh Tai on 6/22/2021.
+ * Created by Thanh Tai on 6/23/2021.
  */
 
 import android.content.Context;
@@ -21,7 +21,7 @@ public class MQTTHelper {
 
     final String serverUri = "tcp://io.adafruit.com:1883";
 
-    final String clientId = "Android_952";
+    final String clientId = "Android_092";
     final String subscriptionTopic = "anhlaga06/feeds/thanhtai";
 
     final String username = "anhlaga06";
@@ -115,3 +115,4 @@ public class MQTTHelper {
         }
     }
 }
+

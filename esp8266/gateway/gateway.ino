@@ -19,21 +19,16 @@ struct_message board2;
 // Create an array with all the structures
 struct_message boardsStruct[2] = {board1, board2};
 
+
 // Callback function that will be executed when data is received
 void OnDataRecv(uint8_t * mac_addr, uint8_t *incomingData, uint8_t len) {
   char macStr[18];
-  Serial.print("Packet received from: ");
-  snprintf(macStr, sizeof(macStr), "%02x:%02x:%02x:%02x:%02x:%02x",
-           mac_addr[0], mac_addr[1], mac_addr[2], mac_addr[3], mac_addr[4], mac_addr[5]);
-  Serial.println(macStr);
   memcpy(&myData, incomingData, sizeof(myData));
-  Serial.printf("Board ID %u: %u bytes\n", myData.id, len);
-  // Update the structures with the new incoming data
+  
   boardsStruct[myData.id-1].temp = myData.temp;
   boardsStruct[myData.id-1].hum = myData.hum;
-  Serial.printf("temp value: %d \n", boardsStruct[myData.id-1].temp);
-  Serial.printf("hum value: %d \n", boardsStruct[myData.id-1].hum);
-  Serial.println();
+  
+  Serial.printf("%u//%f//%f",myData.id, boardsStruct[myData.id-1].temp, boardsStruct[myData.id-1].hum);
 }
  
 void setup() {

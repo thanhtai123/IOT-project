@@ -31,6 +31,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -43,6 +44,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -285,6 +287,7 @@ public class MainActivity extends Activity {
                         hour=hour-12;
                     }
                     c.set(Calendar.HOUR,hour);
+                    c.set(Calendar.AM_PM,Calendar.PM);
                     c.set(Calendar.MONTH,month-1);
                     c.set(Calendar.DATE,day);
                     //start time
@@ -544,6 +547,18 @@ public class MainActivity extends Activity {
         double[] hum1=hum;
         String[] minus1=minus;
         String labelBot="";
+        //sorting to set viewport
+        double[] stemp=tem;
+        double[] shum=hum;
+        Arrays.sort(stemp);
+        Arrays.sort(shum);
+        int minv=(int)stemp[0],maxv=(int)stemp[stemp.length-1];
+        if(stemp[0]*2>shum[0]){
+            minv=(int)(shum[0]/2);
+        }
+        if(stemp[stemp.length-1]*2<shum[shum.length-1]){
+            maxv=(int)(shum[shum.length-1]/2);
+        }
         switch (type){
             case month:
                 labelBot="Time: [Day]";
@@ -653,7 +668,7 @@ public class MainActivity extends Activity {
         // viewport. Set
         // viewport with Y range 0-12;
         Viewport v = lineChartView.getMaximumViewport();
-        v.set(v.left, tempoRange, v.right, 0);
+        v.set(v.left, maxv+2, v.right, minv-2);
         lineChartView.setMaximumViewport(v);
         lineChartView.setCurrentViewport(v);
 

@@ -5,7 +5,7 @@
 #include <DHT.h>
 
 // REPLACE WITH THE MAC Address of your receiver 
-uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+uint8_t broadcastAddress[] = {0xE8, 0xDB, 0x84, 0x94, 0x9A, 0x1B};
 
 // Digital pin connected to the DHT sensor
 #define DHTPIN 5    
@@ -44,6 +44,7 @@ struct_message DHTReadings;
 
 // Callback when data is sent
 void OnDataSent(uint8_t *mac_addr, uint8_t sendStatus) {
+  
   Serial.print("Last Packet Send Status: ");
   if (sendStatus == 0){
     Serial.println("Delivery success");
@@ -111,7 +112,11 @@ void loop() {
 
     //Set values to send
     DHTReadings.temp = temperature;
+    //DHTReadings.temp = 5;
     DHTReadings.hum = humidity;
+    //DHTReadings.hum = 10;
+    Serial.printf("temp: %f \n",DHTReadings.temp);
+    Serial.printf("hum: %f \n",DHTReadings.hum);
     DHTReadings.id=dvid;
 
     // Send message via ESP-NOW
