@@ -2,8 +2,10 @@
 
 .statictis .dothi {
     width: 100%;
-    height: 500px;
+    height: auto;
+    /* line-height: 800px; */
     background: white;
+    padding-top: 27px;
 }
 
 .graph {

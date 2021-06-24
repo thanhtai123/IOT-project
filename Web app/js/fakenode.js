@@ -16,7 +16,7 @@ function onConnect(){
 client.connect({
     onSuccess: onConnect, 
     userName : "anhlaga06",
-    password : "aio_SNye0242pzZyCvW3awiEOa3MdBmQ"
+    password : "aio_klDy98W4KK11yweUSpakQ8sCHSta"
 });
 
 setInterval(function(){

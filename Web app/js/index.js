@@ -7,6 +7,7 @@ $(function(){
     let hum2 = 0;
     let temp2 = 0;
 
+
     function displaySensor1(){
         let lastClasstemp = $('#T').attr('class').split(' ').pop();
         $('#T').removeClass(lastClasstemp);     
@@ -25,12 +26,12 @@ $(function(){
     function displaySensor2() {
         let lastClasstemp = $('#T').attr('class').split(' ').pop();
         $('#T').removeClass(lastClasstemp);     
-        newTemp = "p"+ String(temp2);
+        newTemp = "p"+ String(Math.round(temp2));
         $('#T').addClass(newTemp);
 
         let lastClasshum = $('#H').attr('class').split(' ').pop();
         $('#H').removeClass(lastClasshum);     
-        newhum = "p"+ String(hum2);
+        newhum = "p"+ String(Math.round(hum2));
         $('#H').addClass(newhum);
         
         $("#temp").html(temp2);
@@ -80,7 +81,7 @@ $(function(){
     client.connect({
         onSuccess: onConnect, 
         userName : "anhlaga06",
-        password : "aio_SNye0242pzZyCvW3awiEOa3MdBmQ"
+        password : "aio_klDy98W4KK11yweUSpakQ8sCHSta"
     });
 
     $('[data-toggle="tooltip"]').tooltip(); 
